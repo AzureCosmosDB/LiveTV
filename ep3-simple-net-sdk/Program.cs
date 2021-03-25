@@ -11,8 +11,8 @@ namespace episode3
     class Program
     {
 
-        static string uri = "https://localhost:8081";
-        static string key = "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==";
+        static string uri = "";
+        static string key = "";
         static string databaseId = "database1";
         static string containerId = "families";
 
