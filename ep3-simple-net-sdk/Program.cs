@@ -144,6 +144,49 @@ namespace episode3
 
         }
 
+        public static async Task<string> InsertItemAsync(Family family)
+        {
+            Response<Family> response = await container.CreateItemAsync<Family>(family, new PartitionKey(family.LastName));
+
+            return response.Headers.Session;
+        
+        }
+
+        public static async Task MultiInsert()
+        {
+            List<Family> families = new List<Family>();
+
+            Family family1 = new()
+            {
+                Id = Guid.NewGuid().ToString(),
+                FirstName = "David",
+                LastName = "Brown",
+                Age = 25
+            };
+
+            Family family2 = new()
+            {
+                Id = Guid.NewGuid().ToString(),
+                FirstName = "Mary",
+                LastName = "Brown",
+                Age = 27
+            };
+
+            families.Add(family1);
+            families.Add(family2);
+
+            var tasks = new List<Task<string>>();
+
+
+            foreach(Family family in families)
+            {
+                tasks.Add(InsertItemAsync(family));
+            }
+
+            //List<Task<string>> responses = await Task.WhenAll(tasks).Result;
+
+        }
+
         public static void Print(object obj)
         {
             Console.WriteLine($"{JObject.FromObject(obj)}\n");
